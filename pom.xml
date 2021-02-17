@@ -160,6 +160,7 @@
                 <artifactId>hutool-all</artifactId>
                 <version>5.4.0</version>
             </dependency>
+<!--            日志组件-->
             <dependency>
                 <groupId>net.logstash.logback</groupId>
                 <artifactId>logstash-logback-encoder</artifactId>
