@@ -1,6 +1,7 @@
 package com.jjr8112.mall.front_end.service.impl;
 
 
+import com.jja8112.mall.security.annotation.CacheException;
 import com.jjr8112.mall.common.service.RedisService;
 import com.jjr8112.mall.front_end.service.UmsMemberCacheService;
 import com.jjr8112.mall.mbg.mapper.UmsMemberMapper;

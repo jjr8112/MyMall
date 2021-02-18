@@ -1,6 +1,7 @@
 package com.jjr8112.mall.front_end.service.impl;
 
 
+import com.jja8112.mall.security.util.JwtTokenUtil;
 import com.jjr8112.mall.common.exception.Asserts;
 import com.jjr8112.mall.front_end.domain.MemberDetails;
 import com.jjr8112.mall.front_end.service.UmsMemberCacheService;

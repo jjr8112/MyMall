@@ -183,7 +183,7 @@
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt</artifactId>
-                <version>${jjwt.version}</version>
+                <version>0.9.0</version>
             </dependency>
 
 <!--            SpringData工具包-->

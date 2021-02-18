@@ -2,6 +2,7 @@ package com.jjr8112.mall.front_end.service.impl;
 
 
 import com.jjr8112.mall.front_end.domain.MemberReadHistory;
+import com.jjr8112.mall.front_end.repository.MemberReadHistoryRepository;
 import com.jjr8112.mall.front_end.service.MemberReadHistoryService;
 import com.jjr8112.mall.front_end.service.UmsMemberService;
 import com.jjr8112.mall.mbg.model.UmsMember;
