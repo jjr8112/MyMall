@@ -1,7 +1,7 @@
-package com.jja8112.mall.security.component;
+package com.jjr8112.mall.security.component;
 
 
-import com.jja8112.mall.security.config.IgnoreUrlsConfig;
+import com.jjr8112.mall.security.config.IgnoreUrlsConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.access.SecurityMetadataSource;

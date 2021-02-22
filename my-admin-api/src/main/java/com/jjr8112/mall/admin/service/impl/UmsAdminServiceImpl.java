@@ -3,7 +3,7 @@ package com.jjr8112.mall.admin.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
-import com.jja8112.mall.security.util.JwtTokenUtil;
+import com.jjr8112.mall.security.util.JwtTokenUtil;
 import com.jjr8112.mall.admin.bo.AdminUserDetails;
 import com.jjr8112.mall.admin.dao.UmsAdminRoleRelationDao;
 import com.jjr8112.mall.admin.dto.UmsAdminParam;
@@ -32,6 +32,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
@@ -56,6 +57,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     @Autowired
     private UmsAdminLoginLogMapper loginLogMapper;
     @Autowired
+//    @Resource
     private UmsAdminCacheService adminCacheService;
 
     @Override

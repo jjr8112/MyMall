@@ -1,4 +1,4 @@
-package com.jja8112.mall.security.util;
+package com.jjr8112.mall.security.util;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

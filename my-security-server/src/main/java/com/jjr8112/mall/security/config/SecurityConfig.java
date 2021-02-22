@@ -1,8 +1,8 @@
-package com.jja8112.mall.security.config;
+package com.jjr8112.mall.security.config;
 
 
-import com.jja8112.mall.security.component.*;
-import com.jja8112.mall.security.util.JwtTokenUtil;
+import com.jjr8112.mall.security.component.*;
+import com.jjr8112.mall.security.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +21,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 /**
  * 对SpringSecurity的配置的扩展，支持自定义白名单资源路径和查询用户逻辑
- * Created by macro on 2019/11/5.
  */
 @Configuration  // 后加
 public class SecurityConfig extends WebSecurityConfigurerAdapter {

@@ -1,7 +1,7 @@
 package com.jjr8112.mall.admin.config;
 
 
-import com.jja8112.mall.security.component.DynamicSecurityService;
+import com.jjr8112.mall.security.component.DynamicSecurityService;
 import com.jjr8112.mall.admin.service.UmsAdminService;
 import com.jjr8112.mall.admin.service.UmsResourceService;
 import com.jjr8112.mall.mbg.model.UmsResource;
@@ -13,20 +13,21 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * mall-security模块相关配置
- * Created by macro on 2019/11/9.
  */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends com.jja8112.mall.security.config.SecurityConfig {
+public class SecurityConfig extends com.jjr8112.mall.security.config.SecurityConfig {
 
     @Autowired
+//    @Resource
     private UmsAdminService adminService;
     @Autowired
     private UmsResourceService resourceService;

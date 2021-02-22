@@ -1,4 +1,4 @@
-package com.jja8112.mall.security.component;
+package com.jjr8112.mall.security.component;
 
 
 import cn.hutool.core.util.URLUtil;

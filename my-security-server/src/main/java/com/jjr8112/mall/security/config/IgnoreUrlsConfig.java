@@ -1,4 +1,4 @@
-package com.jja8112.mall.security.config;
+package com.jjr8112.mall.security.config;
 
 import lombok.Getter;
 import lombok.Setter;

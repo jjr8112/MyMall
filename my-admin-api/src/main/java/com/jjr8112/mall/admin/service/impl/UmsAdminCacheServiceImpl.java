@@ -15,22 +15,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
  * 后台用户缓存操作Service实现类
- * Created by macro on 2020/3/13.
  */
 @Service
 public class UmsAdminCacheServiceImpl implements UmsAdminCacheService {
     @Autowired
     private UmsAdminService adminService;
     @Autowired
+//    @Resource
     private RedisService redisService;
     @Autowired
+//    @Resource
     private UmsAdminRoleRelationMapper adminRoleRelationMapper;
     @Autowired
+//    @Resource
     private UmsAdminRoleRelationDao adminRoleRelationDao;
     @Value("${redis.database}")
     private String REDIS_DATABASE;

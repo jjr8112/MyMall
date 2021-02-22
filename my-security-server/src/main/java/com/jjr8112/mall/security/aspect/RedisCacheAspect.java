@@ -1,7 +1,7 @@
-package com.jja8112.mall.security.aspect;
+package com.jjr8112.mall.security.aspect;
 
 
-import com.jja8112.mall.security.annotation.CacheException;
+import com.jjr8112.mall.security.annotation.CacheException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;

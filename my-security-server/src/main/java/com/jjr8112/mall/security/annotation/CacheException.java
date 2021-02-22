@@ -1,4 +1,4 @@
-package com.jja8112.mall.security.annotation;
+package com.jjr8112.mall.security.annotation;
 
 import java.lang.annotation.*;
 

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator
 import com.jjr8112.mall.common.service.impl.RedisServiceImpl;
 import com.jjr8112.mall.common.service.RedisService;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheWriter;
@@ -19,7 +20,8 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.time.Duration;
 
-//@Configuration
+
+@Configuration
                     // 若未加此处，报错：
                     //  Method annotated with @Bean is called directly. Use dependency injection instead.
                     // 加上该注解，仍报错：

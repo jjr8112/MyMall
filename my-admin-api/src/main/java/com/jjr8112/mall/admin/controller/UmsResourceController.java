@@ -1,7 +1,7 @@
 package com.jjr8112.mall.admin.controller;
 
 
-import com.jja8112.mall.security.component.DynamicSecurityMetadataSource;
+import com.jjr8112.mall.security.component.DynamicSecurityMetadataSource;
 import com.jjr8112.mall.admin.service.UmsResourceService;
 import com.jjr8112.mall.common.api.CommonPage;
 import com.jjr8112.mall.common.api.CommonResult;
