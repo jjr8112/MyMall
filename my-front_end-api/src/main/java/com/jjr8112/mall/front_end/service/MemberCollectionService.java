@@ -3,10 +3,12 @@ package com.jjr8112.mall.front_end.service;
 
 import com.jjr8112.mall.front_end.domain.MemberProductCollection;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
 
 /**
  * 会员商品收藏管理Service
  */
+@Service
 public interface MemberCollectionService {
     /**
      * 添加收藏

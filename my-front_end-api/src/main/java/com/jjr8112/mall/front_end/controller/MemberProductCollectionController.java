@@ -12,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+
 /**
  * 会员收藏管理Controller
  */
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/member/productCollection")
 public class MemberProductCollectionController {
     @Autowired
+//    @Resource
     private MemberCollectionService memberCollectionService;
 
     @ApiOperation("添加商品收藏")

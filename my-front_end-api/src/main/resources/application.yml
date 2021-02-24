@@ -1,6 +1,9 @@
 spring:
+  main:
+    allow-bean-definition-overriding: true
   application:
-    name: mall-portal
+#    name: mall-portal
+    name: my-front_end-api
   profiles:
     active: dev #默认为开发环境
 
