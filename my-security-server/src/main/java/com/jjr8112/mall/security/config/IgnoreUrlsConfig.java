@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-@Component  // 未加之前下面的注解标红
+//@Component  // 未加之前下面的注解标红
 @ConfigurationProperties(prefix = "secure.ignored")
 public class IgnoreUrlsConfig {
 
