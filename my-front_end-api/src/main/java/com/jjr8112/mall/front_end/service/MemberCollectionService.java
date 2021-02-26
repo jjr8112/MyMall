@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 /**
  * 会员商品收藏管理Service
  */
-@Service
+@Service        // 后加
 public interface MemberCollectionService {
     /**
      * 添加收藏

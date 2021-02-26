@@ -22,7 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 /**
  * 对SpringSecurity的配置的扩展，支持自定义白名单资源路径和查询用户逻辑
  */
-@Configuration  // 后加
+//@Configuration  // 后加
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired(required = false)
