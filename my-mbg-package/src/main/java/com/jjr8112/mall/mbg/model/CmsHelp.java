@@ -29,6 +29,8 @@ public class CmsHelp implements Serializable {
     @ApiModelProperty(value = "内容")
     private String content;
 
+    // 继承Serializable接口
+    // 还定义了个serialVersionUID变量
     private static final long serialVersionUID = 1L;
 
     public Long getId() {

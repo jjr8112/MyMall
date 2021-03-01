@@ -4,11 +4,29 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 在此类中对 Example类做一次标注
+ */
+
+/**
+ * mybatis-generator会为每个字段产生Criterion，为底层的mapper.xml创建动态sql。
+ * 如果表的字段比较多,产生的example类会十分庞大。
+ * 理论上通过example类可以构造你想到的任何筛选条件。
+ * 在mybatis-generator中加以配置，配置数据表的生成操作就可以自动生成example了。
+ */
+
 public class CmsHelpExample {
+
+    // 确定升、降序
+    // 参数格式：字段+空格+asc(desc)
     protected String orderByClause;
 
+    // 作用：去除重复
+    // true是选择不重复记录，false，反之
     protected boolean distinct;
 
+    // 自定义查询条件
+    // Criteria的集合，集合中对象是由or连接
     protected List<Criteria> oredCriteria;
 
     public CmsHelpExample() {
@@ -64,6 +82,8 @@ public class CmsHelpExample {
         distinct = false;
     }
 
+
+    // 是mybatis中逆向工程中的代码模型
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
 
@@ -546,12 +566,15 @@ public class CmsHelpExample {
         }
     }
 
+    // 内部类Criteria包含一个Cretiron的集合，
+    // 每一个Criteria对象内包含的Cretiron之间是由  AND连接的
     public static class Criteria extends GeneratedCriteria {
         protected Criteria() {
             super();
         }
     }
 
+    // 是最基本,最底层的Where条件，用于字段级的筛选
     public static class Criterion {
         private String condition;
 

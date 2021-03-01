@@ -31,6 +31,12 @@ public class UmsRoleServiceImpl implements UmsRoleService {
     private UmsRoleDao roleDao;
     @Autowired
     private UmsAdminCacheService adminCacheService;
+
+    /**
+     * 添加角色
+     * @param role
+     * @return
+     */
     @Override
     public int create(UmsRole role) {
         role.setCreateTime(new Date());
@@ -39,12 +45,24 @@ public class UmsRoleServiceImpl implements UmsRoleService {
         return roleMapper.insert(role);
     }
 
+    /**
+     * 修改角色信息
+     * @param id
+     * @param role
+     * @return
+     */
     @Override
     public int update(Long id, UmsRole role) {
         role.setId(id);
         return roleMapper.updateByPrimaryKeySelective(role);
     }
 
+
+    /**
+     * 批量删除角色
+     * @param ids
+     * @return
+     */
     @Override
     public int delete(List<Long> ids) {
         UmsRoleExample example = new UmsRoleExample();
@@ -54,11 +72,22 @@ public class UmsRoleServiceImpl implements UmsRoleService {
         return count;
     }
 
+    /**
+     * 获取全部角色
+     * @return
+     */
     @Override
     public List<UmsRole> list() {
         return roleMapper.selectByExample(new UmsRoleExample());
     }
 
+    /**
+     * 分页获取角色
+     * @param keyword
+     * @param pageSize
+     * @param pageNum
+     * @return
+     */
     @Override
     public List<UmsRole> list(String keyword, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
@@ -69,21 +98,43 @@ public class UmsRoleServiceImpl implements UmsRoleService {
         return roleMapper.selectByExample(example);
     }
 
+    /**
+     * 根据管理员ID获取对应菜单
+     * 由用户管理的getAdminInfo(获取当前登录用户信息)调用
+     * @param adminId
+     * @return
+     */
     @Override
     public List<UmsMenu> getMenuList(Long adminId) {
         return roleDao.getMenuList(adminId);
     }
 
+    /**
+     * 获取角色相关菜单
+     * @param roleId
+     * @return
+     */
     @Override
     public List<UmsMenu> listMenu(Long roleId) {
         return roleDao.getMenuListByRoleId(roleId);
     }
 
+    /**
+     * 获取角色相关资源
+     * @param roleId
+     * @return
+     */
     @Override
     public List<UmsResource> listResource(Long roleId) {
         return roleDao.getResourceListByRoleId(roleId);
     }
 
+    /**
+     * 给角色分配菜单
+     * @param roleId
+     * @param menuIds
+     * @return
+     */
     @Override
     public int allocMenu(Long roleId, List<Long> menuIds) {
         //先删除原有关系
@@ -100,6 +151,12 @@ public class UmsRoleServiceImpl implements UmsRoleService {
         return menuIds.size();
     }
 
+    /**
+     * 给角色分配资源
+     * @param roleId
+     * @param resourceIds
+     * @return
+     */
     @Override
     public int allocResource(Long roleId, List<Long> resourceIds) {
         //先删除原有关系

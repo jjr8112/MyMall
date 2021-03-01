@@ -43,7 +43,7 @@ public interface UmsRoleService {
     List<UmsMenu> getMenuList(Long adminId);
 
     /**
-     * 获取角色相关菜单
+     * 划重点--获取角色相关菜单--划重点
      */
     List<UmsMenu> listMenu(Long roleId);
 
@@ -53,7 +53,7 @@ public interface UmsRoleService {
     List<UmsResource> listResource(Long roleId);
 
     /**
-     * 给角色分配菜单
+     * 划重点--给角色分配菜单--划重点
      */
     @Transactional
     int allocMenu(Long roleId, List<Long> menuIds);

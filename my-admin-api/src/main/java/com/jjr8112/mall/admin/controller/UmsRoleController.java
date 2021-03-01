@@ -25,6 +25,25 @@ public class UmsRoleController {
     @Autowired
     private UmsRoleService roleService;
 
+    /**
+     * 角色操作：
+     *     1.添加角色
+     *     2.0.修改角色
+     *     2.1.修改角色状态
+     *     3.删除角色       (好吧，批量删除更优，是在下输了)
+     *     4.0.查看角色
+     *     4.1.分页查看角色
+     *     5.0.为角色分配资源
+     *     5.1.获取角色相关资源
+     *
+     *     新学到的：
+     *     1.0.给角色分配菜单
+     *     1.1.获取角色相关菜单
+     *
+     * @param role
+     *
+     */
+
     @ApiOperation("添加角色")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
