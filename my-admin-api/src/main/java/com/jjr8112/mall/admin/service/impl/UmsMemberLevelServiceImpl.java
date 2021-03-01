@@ -19,7 +19,7 @@ public class UmsMemberLevelServiceImpl implements UmsMemberLevelService {
     @Override
     public List<UmsMemberLevel> list(Integer defaultStatus) {
         UmsMemberLevelExample example = new UmsMemberLevelExample();
-        example.createCriteria().andDefaultStatusEqualTo(defaultStatus);
+        example.createCriteria().andDefaultStatusEqualTo(defaultStatus);    // 添加 DefaultStatus等于 defaultStatus的条件
         return memberLevelMapper.selectByExample(example);
     }
 }

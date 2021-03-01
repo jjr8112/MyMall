@@ -76,10 +76,11 @@ public class UmsMenuServiceImpl implements UmsMenuService {
 
     @Override
     public List<UmsMenuNode> treeList() {
-        List<UmsMenu> menuList = menuMapper.selectByExample(new UmsMenuExample());
-        List<UmsMenuNode> result = menuList.stream()
-                .filter(menu -> menu.getParentId().equals(0L))
-                .map(menu -> covertMenuNode(menu, menuList)).collect(Collectors.toList());
+        List<UmsMenu> menuList = menuMapper.selectByExample(new UmsMenuExample());  // 菜单列表
+        List<UmsMenuNode> result = menuList.stream()            // 流操作
+                .filter(menu -> menu.getParentId().equals(0L))  // 过滤条件：传入一个 menu，得到满足父级菜单为 0L的menu
+                .map(menu -> covertMenuNode(menu, menuList))    // 将原本的 menu转换为具有 children的节点类型
+                .collect(Collectors.toList());                  // 再加入集合中
         return result;
     }
 
@@ -96,10 +97,11 @@ public class UmsMenuServiceImpl implements UmsMenuService {
      */
     private UmsMenuNode covertMenuNode(UmsMenu menu, List<UmsMenu> menuList) {
         UmsMenuNode node = new UmsMenuNode();
-        BeanUtils.copyProperties(menu, node);
-        List<UmsMenuNode> children = menuList.stream()
-                .filter(subMenu -> subMenu.getParentId().equals(menu.getId()))
-                .map(subMenu -> covertMenuNode(subMenu, menuList)).collect(Collectors.toList());
+        BeanUtils.copyProperties(menu, node);                                   // 将 menu中已包含的属性加入到 node中
+        List<UmsMenuNode> children = menuList.stream()                          // 流操作
+                .filter(subMenu -> subMenu.getParentId().equals(menu.getId()))  // 过滤条件：获取当前 menu的子级 menu
+                .map(subMenu -> covertMenuNode(subMenu, menuList))              // 传入当前 menu的子级 menu，递归向下找到最低级 menu
+                .collect(Collectors.toList());                                  // 加入集合
         node.setChildren(children);
         return node;
     }

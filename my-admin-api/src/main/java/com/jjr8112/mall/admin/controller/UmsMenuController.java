@@ -30,7 +30,7 @@ public class UmsMenuController {
     @ResponseBody
     public CommonResult create(@RequestBody UmsMenu umsMenu) {
         int count = menuService.create(umsMenu);
-        if (count > 0) {
+        if (count > 0) {    // 大于0，创建成功
             return CommonResult.success(count);
         } else {
             return CommonResult.failed();

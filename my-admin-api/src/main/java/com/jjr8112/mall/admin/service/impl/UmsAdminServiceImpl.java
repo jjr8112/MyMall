@@ -57,7 +57,6 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     @Autowired
     private UmsAdminLoginLogMapper loginLogMapper;
     @Autowired
-//    @Resource
     private UmsAdminCacheService adminCacheService;
 
     @Override
@@ -100,7 +99,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         String token = null;
         //密码需要客户端加密后传递
         try {
-            UserDetails userDetails = loadUserByUsername(username);
+            UserDetails userDetails = loadUserByUsername(username); // 获取用户信息
             if(!passwordEncoder.matches(password,userDetails.getPassword())){
                 Asserts.fail("密码不正确");
             }
@@ -109,7 +108,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
             }
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            token = jwtTokenUtil.generateToken(userDetails);
+            token = jwtTokenUtil.generateToken(userDetails);    // 用户信息
 //            updateLoginTimeByUsername(username);
             insertLoginLog(username);
         } catch (AuthenticationException e) {
@@ -170,8 +169,8 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     @Override
     public int update(Long id, UmsAdmin admin) {
         admin.setId(id);
-        UmsAdmin rawAdmin = adminMapper.selectByPrimaryKey(id);
-        if(rawAdmin.getPassword().equals(admin.getPassword())){
+        UmsAdmin rawAdmin = adminMapper.selectByPrimaryKey(id);     // 获取对应用户信息
+        if(rawAdmin.getPassword().equals(admin.getPassword())){     // 判断密码是否相同
             //与原加密密码相同的不需要修改
             admin.setPassword(null);
         }else{
@@ -262,7 +261,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     public UserDetails loadUserByUsername(String username){
         //获取用户信息
         UmsAdmin admin = getAdminByUsername(username);
-        if (admin != null) {
+        if (admin != null) {    // 该用户存在
             List<UmsResource> resourceList = getResourceList(admin.getId());
             return new AdminUserDetails(admin,resourceList);
         }

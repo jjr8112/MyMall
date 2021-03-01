@@ -46,7 +46,8 @@ public class UmsAdminController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult<UmsAdmin> register(@Validated @RequestBody UmsAdminParam umsAdminParam) {
-        UmsAdmin umsAdmin = adminService.register(umsAdminParam);
+        UmsAdmin umsAdmin = adminService.register(umsAdminParam);   // 调用注册功能
+        // 不同返回结果
         if (umsAdmin == null) {
             return CommonResult.failed();
         }
@@ -57,7 +58,7 @@ public class UmsAdminController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult login(@Validated @RequestBody UmsAdminLoginParam umsAdminLoginParam) {
-        String token = adminService.login(umsAdminLoginParam.getUsername(), umsAdminLoginParam.getPassword());
+        String token = adminService.login(umsAdminLoginParam.getUsername(), umsAdminLoginParam.getPassword());// 调用登录功能
         if (token == null) {
             return CommonResult.validateFailed("用户名或密码错误");
         }
@@ -85,20 +86,20 @@ public class UmsAdminController {
     @ApiOperation(value = "获取当前登录用户信息")
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult getAdminInfo(Principal principal) {
+    public CommonResult getAdminInfo(Principal principal) { // Principal，Java内置认证与校验核心接口
         if(principal==null){
-            return CommonResult.unauthorized(null);
+            return CommonResult.unauthorized(null);     // 未登录返回结果
         }
-        String username = principal.getName();
-        UmsAdmin umsAdmin = adminService.getAdminByUsername(username);
+        String username = principal.getName();          // 用户名
+        UmsAdmin umsAdmin = adminService.getAdminByUsername(username);  // 获取后台管理员
         Map<String, Object> data = new HashMap<>();
-        data.put("username", umsAdmin.getUsername());
-        data.put("menus", roleService.getMenuList(umsAdmin.getId()));
-        data.put("icon", umsAdmin.getIcon());
-        List<UmsRole> roleList = adminService.getRoleList(umsAdmin.getId());
-        if(CollUtil.isNotEmpty(roleList)){
-            List<String> roles = roleList.stream().map(UmsRole::getName).collect(Collectors.toList());
-            data.put("roles",roles);
+        data.put("username", umsAdmin.getUsername());   // 用户名
+        data.put("menus", roleService.getMenuList(umsAdmin.getId()));   // 获取角色菜单
+        data.put("icon", umsAdmin.getIcon());           // 获取用户头像
+        List<UmsRole> roleList = adminService.getRoleList(umsAdmin.getId()); // 获取用户对应角色
+        if(CollUtil.isNotEmpty(roleList)){              // 集合工具类CollUtil
+            List<String> roles = roleList.stream().map(UmsRole::getName).collect(Collectors.toList());// 获取该用户的所有角色的角色名集合
+            data.put("roles",roles);                    // 角色
         }
         return CommonResult.success(data);
     }
@@ -124,7 +125,7 @@ public class UmsAdminController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<UmsAdmin> getItem(@PathVariable Long id) {
-        UmsAdmin admin = adminService.getItem(id);
+        UmsAdmin admin = adminService.getItem(id);  // 根据id获取指定用户信息
         return CommonResult.success(admin);
     }
 
@@ -144,6 +145,7 @@ public class UmsAdminController {
     @ResponseBody
     public CommonResult updatePassword(@Validated @RequestBody UpdateAdminPasswordParam updatePasswordParam) {
         int status = adminService.updatePassword(updatePasswordParam);
+        // 以下返回值均来自 service层的定义，而不是 update操作的返回值
         if (status > 0) {
             return CommonResult.success(status);
         } else if (status == -1) {
@@ -172,8 +174,8 @@ public class UmsAdminController {
     @RequestMapping(value = "/updateStatus/{id}", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult updateStatus(@PathVariable Long id,@RequestParam(value = "status") Integer status) {
-        UmsAdmin umsAdmin = new UmsAdmin();
-        umsAdmin.setStatus(status);
+        UmsAdmin umsAdmin = new UmsAdmin();     // 创建新的用户实例
+        umsAdmin.setStatus(status);             // 用于暂时保存状态信息
         int count = adminService.update(id,umsAdmin);
         if (count > 0) {
             return CommonResult.success(count);

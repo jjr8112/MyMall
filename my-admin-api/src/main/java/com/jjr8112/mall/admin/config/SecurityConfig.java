@@ -35,7 +35,7 @@ public class SecurityConfig extends com.jjr8112.mall.security.config.SecurityCon
     @Bean
     public UserDetailsService userDetailsService() {
         //获取登录用户信息
-        return username -> adminService.loadUserByUsername(username);
+        return username -> adminService.loadUserByUsername(username);   // 接收一个 username参数，返回 adminService对象
     }
 
     @Bean
