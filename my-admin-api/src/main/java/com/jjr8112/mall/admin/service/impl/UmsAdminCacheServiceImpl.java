@@ -27,13 +27,10 @@ public class UmsAdminCacheServiceImpl implements UmsAdminCacheService {
     @Autowired
     private UmsAdminService adminService;
     @Autowired
-//    @Resource
     private RedisService redisService;
     @Autowired
-//    @Resource
     private UmsAdminRoleRelationMapper adminRoleRelationMapper;
     @Autowired
-//    @Resource
     private UmsAdminRoleRelationDao adminRoleRelationDao;
     @Value("${redis.database}")
     private String REDIS_DATABASE;
@@ -85,11 +82,11 @@ public class UmsAdminCacheServiceImpl implements UmsAdminCacheService {
 
     @Override
     public void delResourceListByResource(Long resourceId) {
-        List<Long> adminIdList = adminRoleRelationDao.getAdminIdList(resourceId);
-        if (CollUtil.isNotEmpty(adminIdList)) {
+        List<Long> adminIdList = adminRoleRelationDao.getAdminIdList(resourceId);       // 获取关联指定资源的用户列表
+        if (CollUtil.isNotEmpty(adminIdList)) {                                         // 用户列表非空
             String keyPrefix = REDIS_DATABASE + ":" + REDIS_KEY_RESOURCE_LIST + ":";
-            List<String> keys = adminIdList.stream().map(adminId -> keyPrefix + adminId).collect(Collectors.toList());
-            redisService.del(keys);
+            List<String> keys = adminIdList.stream().map(adminId -> keyPrefix + adminId).collect(Collectors.toList());      // 用户id的list
+            redisService.del(keys); // 删除多个 key
         }
     }
 

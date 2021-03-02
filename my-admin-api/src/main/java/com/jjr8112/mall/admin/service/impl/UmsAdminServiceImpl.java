@@ -61,17 +61,17 @@ public class UmsAdminServiceImpl implements UmsAdminService {
 
     @Override
     public UmsAdmin getAdminByUsername(String username) {
-        UmsAdmin admin = adminCacheService.getAdmin(username);
-        if(admin!=null) return  admin;
-        UmsAdminExample example = new UmsAdminExample();
+        UmsAdmin admin = adminCacheService.getAdmin(username);              // 先从缓存中根据用户名找用户
+        if(admin!=null) return  admin;                                      // 没有找到则暂时为空
+        UmsAdminExample example = new UmsAdminExample();                    // 从数据库中拉取数据(最新数据)
         example.createCriteria().andUsernameEqualTo(username);
         List<UmsAdmin> adminList = adminMapper.selectByExample(example);
         if (adminList != null && adminList.size() > 0) {
             admin = adminList.get(0);
-            adminCacheService.setAdmin(admin);
-            return admin;
+            adminCacheService.setAdmin(admin);                              // 拉取的数据同步到缓存中
+            return admin;                                                   // 返回值
         }
-        return null;
+        return null;                                                        // 数据库中也没有相应数据，返回空对象
     }
 
     @Override
@@ -182,18 +182,19 @@ public class UmsAdminServiceImpl implements UmsAdminService {
             }
         }
         int count = adminMapper.updateByPrimaryKeySelective(admin);
-        adminCacheService.delAdmin(id);
+        adminCacheService.delAdmin(id);     // 删除缓存中该用户的信息
         return count;
     }
 
     @Override
     public int delete(Long id) {
-        adminCacheService.delAdmin(id);
+        adminCacheService.delAdmin(id);     // 删除缓存中的用户信息
         int count = adminMapper.deleteByPrimaryKey(id);
-        adminCacheService.delResourceList(id);
+        adminCacheService.delResourceList(id);  // 删除缓存中该用户关联的资源列表
         return count;
     }
 
+    // 给用户分配角色
     @Override
     public int updateRole(Long adminId, List<Long> roleIds) {
         int count = roleIds == null ? 0 : roleIds.size();
@@ -212,7 +213,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
             }
             adminRoleRelationDao.insertList(list);
         }
-        adminCacheService.delResourceList(adminId);
+        adminCacheService.delResourceList(adminId);     // 从缓存中删除分配角色后的用户相关的资源列表
         return count;
     }
 
@@ -223,15 +224,15 @@ public class UmsAdminServiceImpl implements UmsAdminService {
 
     @Override
     public List<UmsResource> getResourceList(Long adminId) {
-        List<UmsResource> resourceList = adminCacheService.getResourceList(adminId);
-        if(CollUtil.isNotEmpty(resourceList)){
+        List<UmsResource> resourceList = adminCacheService.getResourceList(adminId);    // 先尝试从缓存中获取用户的资源列表
+        if(CollUtil.isNotEmpty(resourceList)){                                          // 资源列表不为空则直接返回
             return  resourceList;
         }
-        resourceList = adminRoleRelationDao.getResourceList(adminId);
-        if(CollUtil.isNotEmpty(resourceList)){
-            adminCacheService.setResourceList(adminId,resourceList);
+        resourceList = adminRoleRelationDao.getResourceList(adminId);                   // 如果为空，则从数据库中返回
+        if(CollUtil.isNotEmpty(resourceList)){                                          // 数据库中存在该用户的资源列表
+            adminCacheService.setResourceList(adminId,resourceList);                    // 同步到缓存中
         }
-        return resourceList;
+        return resourceList;                                                            // 返回值
     }
 
     @Override
@@ -253,7 +254,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
         }
         umsAdmin.setPassword(passwordEncoder.encode(param.getNewPassword()));
         adminMapper.updateByPrimaryKey(umsAdmin);
-        adminCacheService.delAdmin(umsAdmin.getId());
+        adminCacheService.delAdmin(umsAdmin.getId());   // 从缓存中删除更新了信息的用户
         return 1;
     }
 

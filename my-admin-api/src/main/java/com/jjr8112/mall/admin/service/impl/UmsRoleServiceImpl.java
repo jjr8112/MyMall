@@ -68,7 +68,7 @@ public class UmsRoleServiceImpl implements UmsRoleService {
         UmsRoleExample example = new UmsRoleExample();
         example.createCriteria().andIdIn(ids);      // 角色 id在传入参数范围内的将被批量删除
         int count = roleMapper.deleteByExample(example);
-        adminCacheService.delResourceListByRoleIds(ids);
+        adminCacheService.delResourceListByRoleIds(ids);    // 角色被删除，则从缓存中删除角色相关的资源
         return count;
     }
 
@@ -171,7 +171,7 @@ public class UmsRoleServiceImpl implements UmsRoleService {
             relation.setResourceId(resourceId);
             roleResourceRelationMapper.insert(relation);
         }
-        adminCacheService.delResourceListByRole(roleId);
+        adminCacheService.delResourceListByRole(roleId);    // 原先角色关联的资源被删除，缓存中的相关信息也被删除
         return resourceIds.size();
     }
 }
