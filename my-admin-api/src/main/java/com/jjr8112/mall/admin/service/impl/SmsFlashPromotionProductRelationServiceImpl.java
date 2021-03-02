@@ -3,7 +3,7 @@ package com.jjr8112.mall.admin.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.jjr8112.mall.admin.dao.SmsFlashPromotionProductRelationDao;
-import com.jjr8112.mall.admin.dto.SmsFlashPromotionProduct;
+import com.jjr8112.mall.admin.domain.SmsFlashPromotionProduct;
 import com.jjr8112.mall.admin.service.SmsFlashPromotionProductRelationService;
 import com.jjr8112.mall.mbg.mapper.SmsFlashPromotionProductRelationMapper;
 import com.jjr8112.mall.mbg.model.SmsFlashPromotionProductRelation;

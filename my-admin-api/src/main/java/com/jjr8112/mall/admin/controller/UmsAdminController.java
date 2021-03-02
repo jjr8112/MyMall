@@ -2,9 +2,9 @@ package com.jjr8112.mall.admin.controller;
 
 
 import cn.hutool.core.collection.CollUtil;
-import com.jjr8112.mall.admin.dto.UmsAdminLoginParam;
-import com.jjr8112.mall.admin.dto.UmsAdminParam;
-import com.jjr8112.mall.admin.dto.UpdateAdminPasswordParam;
+import com.jjr8112.mall.admin.domain.UmsAdminLoginParam;
+import com.jjr8112.mall.admin.domain.UmsAdminParam;
+import com.jjr8112.mall.admin.domain.UpdateAdminPasswordParam;
 import com.jjr8112.mall.admin.service.UmsAdminService;
 import com.jjr8112.mall.admin.service.UmsRoleService;
 import com.jjr8112.mall.common.api.CommonPage;

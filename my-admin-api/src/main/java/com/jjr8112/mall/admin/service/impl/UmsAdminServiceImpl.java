@@ -6,8 +6,8 @@ import com.github.pagehelper.PageHelper;
 import com.jjr8112.mall.security.util.JwtTokenUtil;
 import com.jjr8112.mall.admin.bo.AdminUserDetails;
 import com.jjr8112.mall.admin.dao.UmsAdminRoleRelationDao;
-import com.jjr8112.mall.admin.dto.UmsAdminParam;
-import com.jjr8112.mall.admin.dto.UpdateAdminPasswordParam;
+import com.jjr8112.mall.admin.domain.UmsAdminParam;
+import com.jjr8112.mall.admin.domain.UpdateAdminPasswordParam;
 import com.jjr8112.mall.admin.service.UmsAdminCacheService;
 import com.jjr8112.mall.admin.service.UmsAdminService;
 import com.jjr8112.mall.common.exception.Asserts;
@@ -32,7 +32,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;

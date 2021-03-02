@@ -3,8 +3,8 @@ package com.jjr8112.mall.admin.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.jjr8112.mall.admin.dao.PmsProductAttributeDao;
-import com.jjr8112.mall.admin.dto.PmsProductAttributeParam;
-import com.jjr8112.mall.admin.dto.ProductAttrInfo;
+import com.jjr8112.mall.admin.domain.PmsProductAttributeParam;
+import com.jjr8112.mall.admin.domain.ProductAttrInfo;
 import com.jjr8112.mall.admin.service.PmsProductAttributeService;
 import com.jjr8112.mall.mbg.mapper.PmsProductAttributeCategoryMapper;
 import com.jjr8112.mall.mbg.mapper.PmsProductAttributeMapper;

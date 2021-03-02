@@ -1,7 +1,7 @@
 package com.jjr8112.mall.admin.controller;
 
 
-import com.jjr8112.mall.admin.dto.PmsProductAttributeCategoryItem;
+import com.jjr8112.mall.admin.domain.PmsProductAttributeCategoryItem;
 import com.jjr8112.mall.admin.service.PmsProductAttributeCategoryService;
 import com.jjr8112.mall.common.api.CommonPage;
 import com.jjr8112.mall.common.api.CommonResult;

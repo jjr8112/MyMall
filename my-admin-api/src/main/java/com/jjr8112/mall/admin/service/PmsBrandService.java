@@ -1,7 +1,7 @@
 package com.jjr8112.mall.admin.service;
 
 
-import com.jjr8112.mall.admin.dto.PmsBrandParam;
+import com.jjr8112.mall.admin.domain.PmsBrandParam;
 import com.jjr8112.mall.mbg.model.PmsBrand;
 import org.springframework.transaction.annotation.Transactional;
 

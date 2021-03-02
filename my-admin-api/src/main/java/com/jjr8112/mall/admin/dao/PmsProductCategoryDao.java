@@ -1,6 +1,6 @@
 package com.jjr8112.mall.admin.dao;
 
-import com.jjr8112.mall.admin.dto.PmsProductCategoryWithChildrenItem;
+import com.jjr8112.mall.admin.domain.PmsProductCategoryWithChildrenItem;
 
 import java.util.List;
 

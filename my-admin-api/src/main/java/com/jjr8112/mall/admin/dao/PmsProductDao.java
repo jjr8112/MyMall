@@ -1,6 +1,6 @@
 package com.jjr8112.mall.admin.dao;
 
-import com.jjr8112.mall.admin.dto.PmsProductResult;
+import com.jjr8112.mall.admin.domain.PmsProductResult;
 import org.apache.ibatis.annotations.Param;
 
 /**

@@ -1,4 +1,4 @@
-package com.jjr8112.mall.admin.dto;
+package com.jjr8112.mall.admin.domain;
 
 import com.jjr8112.mall.mbg.model.PmsProductAttribute;
 import com.jjr8112.mall.mbg.model.PmsProductAttributeCategory;

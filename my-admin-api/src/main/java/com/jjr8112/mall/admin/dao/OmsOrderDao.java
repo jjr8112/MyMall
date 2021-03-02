@@ -1,9 +1,9 @@
 package com.jjr8112.mall.admin.dao;
 
 
-import com.jjr8112.mall.admin.dto.OmsOrderDeliveryParam;
-import com.jjr8112.mall.admin.dto.OmsOrderDetail;
-import com.jjr8112.mall.admin.dto.OmsOrderQueryParam;
+import com.jjr8112.mall.admin.domain.OmsOrderDeliveryParam;
+import com.jjr8112.mall.admin.domain.OmsOrderDetail;
+import com.jjr8112.mall.admin.domain.OmsOrderQueryParam;
 import com.jjr8112.mall.mbg.model.OmsOrder;
 import org.apache.ibatis.annotations.Param;
 

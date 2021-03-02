@@ -1,7 +1,7 @@
 package com.jjr8112.mall.admin.service;
 
 
-import com.jjr8112.mall.admin.dto.SmsCouponParam;
+import com.jjr8112.mall.admin.domain.SmsCouponParam;
 import com.jjr8112.mall.mbg.model.SmsCoupon;
 import org.springframework.transaction.annotation.Transactional;
 

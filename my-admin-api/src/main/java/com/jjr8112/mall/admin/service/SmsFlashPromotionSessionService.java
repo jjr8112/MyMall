@@ -1,7 +1,7 @@
 package com.jjr8112.mall.admin.service;
 
 
-import com.jjr8112.mall.admin.dto.SmsFlashPromotionSessionDetail;
+import com.jjr8112.mall.admin.domain.SmsFlashPromotionSessionDetail;
 import com.jjr8112.mall.mbg.model.SmsFlashPromotionSession;
 
 import java.util.List;

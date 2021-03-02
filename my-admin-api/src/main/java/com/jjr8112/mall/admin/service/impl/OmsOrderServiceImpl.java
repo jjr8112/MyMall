@@ -4,7 +4,7 @@ package com.jjr8112.mall.admin.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.jjr8112.mall.admin.dao.OmsOrderDao;
 import com.jjr8112.mall.admin.dao.OmsOrderOperateHistoryDao;
-import com.jjr8112.mall.admin.dto.*;
+import com.jjr8112.mall.admin.domain.*;
 import com.jjr8112.mall.admin.service.OmsOrderService;
 import com.jjr8112.mall.mbg.mapper.OmsOrderMapper;
 import com.jjr8112.mall.mbg.mapper.OmsOrderOperateHistoryMapper;

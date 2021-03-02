@@ -1,8 +1,8 @@
 package com.jjr8112.mall.admin.service;
 
 
-import com.jjr8112.mall.admin.dto.PmsProductAttributeParam;
-import com.jjr8112.mall.admin.dto.ProductAttrInfo;
+import com.jjr8112.mall.admin.domain.PmsProductAttributeParam;
+import com.jjr8112.mall.admin.domain.ProductAttrInfo;
 import com.jjr8112.mall.mbg.model.PmsProductAttribute;
 import org.springframework.transaction.annotation.Transactional;
 

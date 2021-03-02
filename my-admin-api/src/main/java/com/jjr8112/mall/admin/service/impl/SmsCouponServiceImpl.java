@@ -5,7 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.jjr8112.mall.admin.dao.SmsCouponDao;
 import com.jjr8112.mall.admin.dao.SmsCouponProductCategoryRelationDao;
 import com.jjr8112.mall.admin.dao.SmsCouponProductRelationDao;
-import com.jjr8112.mall.admin.dto.SmsCouponParam;
+import com.jjr8112.mall.admin.domain.SmsCouponParam;
 import com.jjr8112.mall.admin.service.SmsCouponService;
 import com.jjr8112.mall.mbg.mapper.SmsCouponMapper;
 import com.jjr8112.mall.mbg.mapper.SmsCouponProductCategoryRelationMapper;

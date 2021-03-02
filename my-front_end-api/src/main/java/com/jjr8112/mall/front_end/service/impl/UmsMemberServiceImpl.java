@@ -56,14 +56,14 @@ public class UmsMemberServiceImpl implements UmsMemberService {
 
     @Override
     public UmsMember getByUsername(String username) {
-        UmsMember member = memberCacheService.getMember(username);
-        if(member!=null) return member;
+        UmsMember member = memberCacheService.getMember(username);              // 先尝试从缓存中通过会员名获取会员
+        if(member!=null) return member;                                         // 缓存中未找到
         UmsMemberExample example = new UmsMemberExample();
-        example.createCriteria().andUsernameEqualTo(username);
-        List<UmsMember> memberList = memberMapper.selectByExample(example);
-        if (!CollectionUtils.isEmpty(memberList)) {
+        example.createCriteria().andUsernameEqualTo(username);                  // 与指定会员名相同
+        List<UmsMember> memberList = memberMapper.selectByExample(example);     // 从数据库中获取相应会员
+        if (!CollectionUtils.isEmpty(memberList)) {                             // 数据库中存在相应会员
             member = memberList.get(0);
-            memberCacheService.setMember(member);
+            memberCacheService.setMember(member);                               // 同步到缓存
             return member;
         }
         return null;
@@ -113,26 +113,26 @@ public class UmsMemberServiceImpl implements UmsMemberService {
         for(int i=0;i<6;i++){
             sb.append(random.nextInt(10));
         }
-        memberCacheService.setAuthCode(telephone,sb.toString());
+        memberCacheService.setAuthCode(telephone,sb.toString());    // 保存验证码
         return sb.toString();
     }
 
     @Override
     public void updatePassword(String telephone, String password, String authCode) {
         UmsMemberExample example = new UmsMemberExample();
-        example.createCriteria().andPhoneEqualTo(telephone);
-        List<UmsMember> memberList = memberMapper.selectByExample(example);
-        if(CollectionUtils.isEmpty(memberList)){
-            Asserts.fail("该账号不存在");
+        example.createCriteria().andPhoneEqualTo(telephone);                // 通过电话号码获取会员信息
+        List<UmsMember> memberList = memberMapper.selectByExample(example); // 获取符合上述电话号码的所有会员
+        if(CollectionUtils.isEmpty(memberList)){                            // 不存在这样的会员
+            Asserts.fail("该账号不存在");                                    // 自定义断言类
         }
         //验证验证码
-        if(!verifyAuthCode(authCode,telephone)){
+        if(!verifyAuthCode(authCode,telephone)){                            // 校验验证码出错
             Asserts.fail("验证码错误");
         }
-        UmsMember umsMember = memberList.get(0);
-        umsMember.setPassword(passwordEncoder.encode(password));
-        memberMapper.updateByPrimaryKeySelective(umsMember);
-        memberCacheService.delMember(umsMember.getId());
+        UmsMember umsMember = memberList.get(0);                            // 获取相应会员
+        umsMember.setPassword(passwordEncoder.encode(password));            // 修改其密码
+        memberMapper.updateByPrimaryKeySelective(umsMember);                // 跟新会员密码
+        memberCacheService.delMember(umsMember.getId());                    // 同步到
     }
 
     @Override
@@ -189,7 +189,7 @@ public class UmsMemberServiceImpl implements UmsMemberService {
         if(StringUtils.isEmpty(authCode)){
             return false;
         }
-        String realAuthCode = memberCacheService.getAuthCode(telephone);
+        String realAuthCode = memberCacheService.getAuthCode(telephone);    // 获取验证码
         return authCode.equals(realAuthCode);
     }
 

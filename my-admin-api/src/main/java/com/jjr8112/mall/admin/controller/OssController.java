@@ -1,8 +1,8 @@
 package com.jjr8112.mall.admin.controller;
 
 
-import com.jjr8112.mall.admin.dto.OssCallbackResult;
-import com.jjr8112.mall.admin.dto.OssPolicyResult;
+import com.jjr8112.mall.admin.domain.OssCallbackResult;
+import com.jjr8112.mall.admin.domain.OssPolicyResult;
 import com.jjr8112.mall.admin.service.OssService;
 import com.jjr8112.mall.common.api.CommonResult;
 import io.swagger.annotations.Api;

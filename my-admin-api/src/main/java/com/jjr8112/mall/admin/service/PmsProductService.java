@@ -1,9 +1,9 @@
 package com.jjr8112.mall.admin.service;
 
 
-import com.jjr8112.mall.admin.dto.PmsProductParam;
-import com.jjr8112.mall.admin.dto.PmsProductQueryParam;
-import com.jjr8112.mall.admin.dto.PmsProductResult;
+import com.jjr8112.mall.admin.domain.PmsProductParam;
+import com.jjr8112.mall.admin.domain.PmsProductQueryParam;
+import com.jjr8112.mall.admin.domain.PmsProductResult;
 import com.jjr8112.mall.mbg.model.PmsProduct;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;

@@ -1,7 +1,7 @@
 package com.jjr8112.mall.admin.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.jjr8112.mall.admin.dto.PmsBrandParam;
+import com.jjr8112.mall.admin.domain.PmsBrandParam;
 import com.jjr8112.mall.admin.service.PmsBrandService;
 import com.jjr8112.mall.mbg.mapper.PmsBrandMapper;
 import com.jjr8112.mall.mbg.mapper.PmsProductMapper;

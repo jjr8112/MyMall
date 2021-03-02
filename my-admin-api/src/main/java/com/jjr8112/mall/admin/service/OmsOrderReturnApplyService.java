@@ -1,9 +1,9 @@
 package com.jjr8112.mall.admin.service;
 
 
-import com.jjr8112.mall.admin.dto.OmsOrderReturnApplyResult;
-import com.jjr8112.mall.admin.dto.OmsReturnApplyQueryParam;
-import com.jjr8112.mall.admin.dto.OmsUpdateStatusParam;
+import com.jjr8112.mall.admin.domain.OmsOrderReturnApplyResult;
+import com.jjr8112.mall.admin.domain.OmsReturnApplyQueryParam;
+import com.jjr8112.mall.admin.domain.OmsUpdateStatusParam;
 import com.jjr8112.mall.mbg.model.OmsOrderReturnApply;
 
 import java.util.List;

@@ -1,8 +1,8 @@
 package com.jjr8112.mall.admin.controller;
 
 
-import com.jjr8112.mall.admin.dto.PmsProductCategoryParam;
-import com.jjr8112.mall.admin.dto.PmsProductCategoryWithChildrenItem;
+import com.jjr8112.mall.admin.domain.PmsProductCategoryParam;
+import com.jjr8112.mall.admin.domain.PmsProductCategoryWithChildrenItem;
 import com.jjr8112.mall.admin.service.PmsProductCategoryService;
 import com.jjr8112.mall.common.api.CommonPage;
 import com.jjr8112.mall.common.api.CommonResult;

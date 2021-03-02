@@ -1,9 +1,9 @@
 package com.jjr8112.mall.admin.controller;
 
 
-import com.jjr8112.mall.admin.dto.PmsProductParam;
-import com.jjr8112.mall.admin.dto.PmsProductQueryParam;
-import com.jjr8112.mall.admin.dto.PmsProductResult;
+import com.jjr8112.mall.admin.domain.PmsProductParam;
+import com.jjr8112.mall.admin.domain.PmsProductQueryParam;
+import com.jjr8112.mall.admin.domain.PmsProductResult;
 import com.jjr8112.mall.admin.service.PmsProductService;
 import com.jjr8112.mall.common.api.CommonPage;
 import com.jjr8112.mall.common.api.CommonResult;

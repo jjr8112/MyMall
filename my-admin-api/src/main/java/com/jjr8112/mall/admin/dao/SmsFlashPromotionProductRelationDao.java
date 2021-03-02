@@ -1,6 +1,6 @@
 package com.jjr8112.mall.admin.dao;
 
-import com.jjr8112.mall.admin.dto.SmsFlashPromotionProduct;
+import com.jjr8112.mall.admin.domain.SmsFlashPromotionProduct;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

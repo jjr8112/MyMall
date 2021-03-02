@@ -22,19 +22,6 @@
     
     (5)initialDelay 和initialDelayString表示一个初始延迟时间，第一次被调用前延迟的时间
 
-3.debug过程
+3.可以新增一层缓存，用于缓存热门商品
 
-在原项目中，IgnoreUrlsConfig类没有@Component注解，加上后在报错如下
-    
-    Description:
-    The bean 'ignoreUrlsConfig', defined in class path resource 
-    [com/jjr8112/mall/front_end/config/SecurityServerConfig.class], could not be registered. 
-    A bean with that name has already been defined in file 
-    [F:\MyMall\my-security-server\target\classes\com\jjr8112\mall\security\config\IgnoreUrlsConfig.class]
-    and overriding is disabled.
-    
-    Action:
-    Consider renaming one of the beans 
-    or enabling overriding by setting spring.main.allow-bean-definition-overriding=true
-因此去掉了@Component注解。
-之后又有新的报错如下：
+4.test

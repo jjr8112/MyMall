@@ -3,9 +3,9 @@ package com.jjr8112.mall.admin.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.jjr8112.mall.admin.dao.OmsOrderReturnApplyDao;
-import com.jjr8112.mall.admin.dto.OmsOrderReturnApplyResult;
-import com.jjr8112.mall.admin.dto.OmsReturnApplyQueryParam;
-import com.jjr8112.mall.admin.dto.OmsUpdateStatusParam;
+import com.jjr8112.mall.admin.domain.OmsOrderReturnApplyResult;
+import com.jjr8112.mall.admin.domain.OmsReturnApplyQueryParam;
+import com.jjr8112.mall.admin.domain.OmsUpdateStatusParam;
 import com.jjr8112.mall.admin.service.OmsOrderReturnApplyService;
 import com.jjr8112.mall.mbg.mapper.OmsOrderReturnApplyMapper;
 import com.jjr8112.mall.mbg.model.OmsOrderReturnApply;

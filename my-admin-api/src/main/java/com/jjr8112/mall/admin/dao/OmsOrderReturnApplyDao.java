@@ -1,8 +1,8 @@
 package com.jjr8112.mall.admin.dao;
 
 
-import com.jjr8112.mall.admin.dto.OmsOrderReturnApplyResult;
-import com.jjr8112.mall.admin.dto.OmsReturnApplyQueryParam;
+import com.jjr8112.mall.admin.domain.OmsOrderReturnApplyResult;
+import com.jjr8112.mall.admin.domain.OmsReturnApplyQueryParam;
 import com.jjr8112.mall.mbg.model.OmsOrderReturnApply;
 import org.apache.ibatis.annotations.Param;
 

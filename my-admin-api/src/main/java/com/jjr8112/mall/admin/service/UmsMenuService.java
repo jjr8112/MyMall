@@ -1,7 +1,7 @@
 package com.jjr8112.mall.admin.service;
 
 
-import com.jjr8112.mall.admin.dto.UmsMenuNode;
+import com.jjr8112.mall.admin.domain.UmsMenuNode;
 import com.jjr8112.mall.mbg.model.UmsMenu;
 
 import java.util.List;

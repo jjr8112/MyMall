@@ -3,8 +3,8 @@ package com.jjr8112.mall.admin.controller;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.json.JSONUtil;
-import com.jjr8112.mall.admin.dto.BucketPolicyConfigDto;
-import com.jjr8112.mall.admin.dto.MinioUploadDto;
+import com.jjr8112.mall.admin.domain.BucketPolicyConfigDto;
+import com.jjr8112.mall.admin.domain.MinioUploadDto;
 import com.jjr8112.mall.common.api.CommonResult;
 import io.minio.*;
 import io.swagger.annotations.Api;

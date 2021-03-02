@@ -1,6 +1,6 @@
 package com.jjr8112.mall.admin.dao;
 
-import com.jjr8112.mall.admin.dto.SmsCouponParam;
+import com.jjr8112.mall.admin.domain.SmsCouponParam;
 import org.apache.ibatis.annotations.Param;
 
 /**

@@ -1,4 +1,4 @@
-package com.jjr8112.mall.admin.dto;
+package com.jjr8112.mall.admin.domain;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

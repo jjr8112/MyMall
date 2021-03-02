@@ -1,7 +1,7 @@
 package com.jjr8112.mall.admin.controller;
 
 
-import com.jjr8112.mall.admin.dto.*;
+import com.jjr8112.mall.admin.domain.*;
 import com.jjr8112.mall.admin.service.OmsOrderService;
 import com.jjr8112.mall.common.api.CommonPage;
 import com.jjr8112.mall.common.api.CommonResult;

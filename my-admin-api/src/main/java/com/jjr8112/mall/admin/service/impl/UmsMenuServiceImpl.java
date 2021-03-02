@@ -2,7 +2,7 @@ package com.jjr8112.mall.admin.service.impl;
 
 
 import com.github.pagehelper.PageHelper;
-import com.jjr8112.mall.admin.dto.UmsMenuNode;
+import com.jjr8112.mall.admin.domain.UmsMenuNode;
 import com.jjr8112.mall.admin.service.UmsMenuService;
 import com.jjr8112.mall.mbg.mapper.UmsMenuMapper;
 import com.jjr8112.mall.mbg.model.UmsMenu;
