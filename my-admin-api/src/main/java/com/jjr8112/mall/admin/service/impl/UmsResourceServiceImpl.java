@@ -33,7 +33,7 @@ public class UmsResourceServiceImpl implements UmsResourceService {
     public int update(Long id, UmsResource umsResource) {
         umsResource.setId(id);
         int count = resourceMapper.updateByPrimaryKeySelective(umsResource);
-        adminCacheService.delResourceListByResource(id);
+        adminCacheService.delResourceListByResource(id);    // 删除资源项目后台用户缓存
         return count;
     }
 

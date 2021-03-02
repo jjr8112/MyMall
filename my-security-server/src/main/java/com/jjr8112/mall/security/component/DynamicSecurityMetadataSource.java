@@ -14,7 +14,6 @@ import java.util.*;
 
 /**
  * 动态权限数据源，用于获取动态权限规则
- * Created by macro on 2020/2/7.
  */
 public class DynamicSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
@@ -28,7 +27,7 @@ public class DynamicSecurityMetadataSource implements FilterInvocationSecurityMe
     }
 
     public void clearDataSource() {
-        configAttributeMap.clear();
+        configAttributeMap.clear(); // 清空初始属性
         configAttributeMap = null;
     }
 

@@ -17,7 +17,7 @@ public interface UmsRoleMapper {
 
     int insertSelective(UmsRole record);
 
-    List<UmsRole> selectByExample(UmsRoleExample example);
+    List<UmsRole> selectByExample(UmsRoleExample example);  // 根据一个 umsRole实例查询所有角色
 
     UmsRole selectByPrimaryKey(Long id);
 

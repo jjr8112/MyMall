@@ -32,8 +32,8 @@ public class UmsResourceController {
     @ResponseBody
     public CommonResult create(@RequestBody UmsResource umsResource) {
         int count = resourceService.create(umsResource);
-        dynamicSecurityMetadataSource.clearDataSource();
-        if (count > 0) {
+        dynamicSecurityMetadataSource.clearDataSource();    // 清空数据源
+        if (count > 0) {    // 创建成功
             return CommonResult.success(count);
         } else {
             return CommonResult.failed();
@@ -58,7 +58,7 @@ public class UmsResourceController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<UmsResource> getItem(@PathVariable Long id) {
-        UmsResource umsResource = resourceService.getItem(id);
+        UmsResource umsResource = resourceService.getItem(id);  // 调用获取资源详情
         return CommonResult.success(umsResource);
     }
 
@@ -67,8 +67,8 @@ public class UmsResourceController {
     @ResponseBody
     public CommonResult delete(@PathVariable Long id) {
         int count = resourceService.delete(id);
-        dynamicSecurityMetadataSource.clearDataSource();
-        if (count > 0) {
+        dynamicSecurityMetadataSource.clearDataSource();    // 清空数据源
+        if (count > 0) {    // 删除成功
             return CommonResult.success(count);
         } else {
             return CommonResult.failed();
@@ -84,14 +84,14 @@ public class UmsResourceController {
                                                       @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                       @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<UmsResource> resourceList = resourceService.list(categoryId,nameKeyword, urlKeyword, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(resourceList));
+        return CommonResult.success(CommonPage.restPage(resourceList)); // 转为分页展示
     }
 
     @ApiOperation("查询所有后台资源")
     @RequestMapping(value = "/listAll", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<List<UmsResource>> listAll() {
-        List<UmsResource> resourceList = resourceService.listAll();
+        List<UmsResource> resourceList = resourceService.listAll(); // 保存全部资源
         return CommonResult.success(resourceList);
     }
 }

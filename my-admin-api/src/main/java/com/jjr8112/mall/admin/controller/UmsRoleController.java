@@ -128,7 +128,7 @@ public class UmsRoleController {
     @RequestMapping(value = "/allocMenu", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult allocMenu(@RequestParam Long roleId, @RequestParam List<Long> menuIds) {
-        int count = roleService.allocMenu(roleId, menuIds);
+        int count = roleService.allocMenu(roleId, menuIds);     // menuIds，待分配给指定角色的所有菜单
         return CommonResult.success(count);
     }
 

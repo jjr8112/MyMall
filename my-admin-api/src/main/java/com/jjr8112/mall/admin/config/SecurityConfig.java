@@ -44,8 +44,9 @@ public class SecurityConfig extends com.jjr8112.mall.security.config.SecurityCon
             @Override
             public Map<String, ConfigAttribute> loadDataSource() {
                 Map<String, ConfigAttribute> map = new ConcurrentHashMap<>();
-                List<UmsResource> resourceList = resourceService.listAll();
+                List<UmsResource> resourceList = resourceService.listAll();     // 查询所有资源
                 for (UmsResource resource : resourceList) {
+                    // 每项资源以 “URL + security配置” 的二元组保存
                     map.put(resource.getUrl(), new org.springframework.security.access.SecurityConfig(resource.getId() + ":" + resource.getName()));
                 }
                 return map;

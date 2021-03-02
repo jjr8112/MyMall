@@ -66,7 +66,7 @@ public class UmsRoleServiceImpl implements UmsRoleService {
     @Override
     public int delete(List<Long> ids) {
         UmsRoleExample example = new UmsRoleExample();
-        example.createCriteria().andIdIn(ids);
+        example.createCriteria().andIdIn(ids);      // 角色 id在传入参数范围内的将被批量删除
         int count = roleMapper.deleteByExample(example);
         adminCacheService.delResourceListByRoleIds(ids);
         return count;
@@ -78,7 +78,7 @@ public class UmsRoleServiceImpl implements UmsRoleService {
      */
     @Override
     public List<UmsRole> list() {
-        return roleMapper.selectByExample(new UmsRoleExample());
+        return roleMapper.selectByExample(new UmsRoleExample());    // 根据一个 umsRole实例查询所有角色
     }
 
     /**
@@ -93,7 +93,7 @@ public class UmsRoleServiceImpl implements UmsRoleService {
         PageHelper.startPage(pageNum, pageSize);
         UmsRoleExample example = new UmsRoleExample();
         if (!StringUtils.isEmpty(keyword)) {
-            example.createCriteria().andNameLike("%" + keyword + "%");
+            example.createCriteria().andNameLike("%" + keyword + "%");  // 模糊查询
         }
         return roleMapper.selectByExample(example);
     }
@@ -104,6 +104,7 @@ public class UmsRoleServiceImpl implements UmsRoleService {
      * @param adminId
      * @return
      */
+    // 用于 UmsAdminController
     @Override
     public List<UmsMenu> getMenuList(Long adminId) {
         return roleDao.getMenuList(adminId);
@@ -139,8 +140,8 @@ public class UmsRoleServiceImpl implements UmsRoleService {
     public int allocMenu(Long roleId, List<Long> menuIds) {
         //先删除原有关系
         UmsRoleMenuRelationExample example=new UmsRoleMenuRelationExample();
-        example.createCriteria().andRoleIdEqualTo(roleId);
-        roleMenuRelationMapper.deleteByExample(example);
+        example.createCriteria().andRoleIdEqualTo(roleId);  // 获取指定 id的角色
+        roleMenuRelationMapper.deleteByExample(example);    // 删除所有该角色的关联菜单
         //批量插入新关系
         for (Long menuId : menuIds) {
             UmsRoleMenuRelation relation = new UmsRoleMenuRelation();
@@ -148,7 +149,7 @@ public class UmsRoleServiceImpl implements UmsRoleService {
             relation.setMenuId(menuId);
             roleMenuRelationMapper.insert(relation);
         }
-        return menuIds.size();
+        return menuIds.size();  // 成功分配的菜单数
     }
 
     /**

@@ -1,0 +1,2 @@
+1.注意动态权限相关业务逻辑
+DynamicSecurityMetadataSource
