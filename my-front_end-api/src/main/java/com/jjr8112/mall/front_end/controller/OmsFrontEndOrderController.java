@@ -21,7 +21,7 @@ import java.util.Map;
  * 订单管理Controller
  */
 @Controller
-@Api(tags = "OmsPortalOrderController", description = "订单管理")
+@Api(tags = "OmsFrontEndOrderController", description = "订单管理")
 @RequestMapping("/order")
 public class OmsFrontEndOrderController {
     @Autowired

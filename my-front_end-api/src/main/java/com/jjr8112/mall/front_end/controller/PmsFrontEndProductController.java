@@ -20,7 +20,7 @@ import java.util.List;
  * 前台商品管理Controller
  */
 @Controller
-@Api(tags = "PmsPortalProductController", description = "前台商品管理")
+@Api(tags = "PmsFrontEndProductController", description = "前台商品管理")
 @RequestMapping("/product")
 public class PmsFrontEndProductController {
 

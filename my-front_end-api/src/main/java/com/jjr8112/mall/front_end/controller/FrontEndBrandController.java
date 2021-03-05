@@ -16,7 +16,6 @@ import java.util.List;
 
 /**
  * 首页品牌推荐管理Controller
- * Created by macro on 2020/5/15.
  */
 @Controller
 @Api(tags = "FrontEndBrandController", description = "前台品牌管理")
