@@ -28,7 +28,6 @@ import java.util.stream.Collectors;
 
 /**
  * 前台订单管理Service
- * Created by macro on 2018/8/30.
  */
 @Service
 public class OmsFrontEndOrderServiceImpl implements OmsFrontEndOrderService {
@@ -59,7 +58,7 @@ public class OmsFrontEndOrderServiceImpl implements OmsFrontEndOrderService {
     @Value("${redis.database}")
     private String REDIS_DATABASE;
     @Autowired
-    private FrontEndOrderDao portalOrderDao;
+    private FrontEndOrderDao frontEndOrderDao;
     @Autowired
     private OmsOrderSettingMapper orderSettingMapper;
     @Autowired
@@ -67,18 +66,23 @@ public class OmsFrontEndOrderServiceImpl implements OmsFrontEndOrderService {
     @Autowired
     private CancelOrderSender cancelOrderSender;
 
+    /**
+     * 根据用户购物车信息生成确认单信息
+     * @param cartIds
+     * @return
+     */
     @Override
-    public ConfirmOrderResult generateConfirmOrder(List<Long> cartIds) {
-        ConfirmOrderResult result = new ConfirmOrderResult();
+    public ConfirmOrderResult generateConfirmOrder(List<Long> cartIds) {    // 不止一个购物车商品进入结算
+        ConfirmOrderResult result = new ConfirmOrderResult();       // 确认订单对象
         //获取购物车信息
         UmsMember currentMember = memberService.getCurrentMember();
-        List<CartPromotionItem> cartPromotionItemList = cartItemService.listPromotion(currentMember.getId(),cartIds);
+        List<CartPromotionItem> cartPromotionItemList = cartItemService.listPromotion(currentMember.getId(),cartIds);   // 包含促销信息
         result.setCartPromotionItemList(cartPromotionItemList);
         //获取用户收货地址列表
-        List<UmsMemberReceiveAddress> memberReceiveAddressList = memberReceiveAddressService.list();
+        List<UmsMemberReceiveAddress> memberReceiveAddressList = memberReceiveAddressService.list();    // 收货地址
         result.setMemberReceiveAddressList(memberReceiveAddressList);
         //获取用户可用优惠券列表
-        List<SmsCouponHistoryDetail> couponHistoryDetailList = memberCouponService.listCart(cartPromotionItemList, 1);
+        List<SmsCouponHistoryDetail> couponHistoryDetailList = memberCouponService.listCart(cartPromotionItemList, 1);  // 可用优惠券
         result.setCouponHistoryDetailList(couponHistoryDetailList);
         //获取用户积分
         result.setMemberIntegration(currentMember.getIntegration());
@@ -86,11 +90,16 @@ public class OmsFrontEndOrderServiceImpl implements OmsFrontEndOrderService {
         UmsIntegrationConsumeSetting integrationConsumeSetting = integrationConsumeSettingMapper.selectByPrimaryKey(1L);
         result.setIntegrationConsumeSetting(integrationConsumeSetting);
         //计算总金额、活动优惠、应付金额
-        ConfirmOrderResult.CalcAmount calcAmount = calcCartAmount(cartPromotionItemList);
+        ConfirmOrderResult.CalcAmount calcAmount = calcCartAmount(cartPromotionItemList);   // 订单总金额为确定单的内部类
         result.setCalcAmount(calcAmount);
         return result;
     }
 
+    /**
+     * 根据提交信息生成订单
+     * @param orderParam
+     * @return
+     */
     @Override
     public Map<String, Object> generateOrder(OrderParam orderParam) {
         List<OmsOrderItem> orderItemList = new ArrayList<>();
@@ -203,8 +212,8 @@ public class OmsFrontEndOrderServiceImpl implements OmsFrontEndOrderService {
         order.setReceiverRegion(address.getRegion());
         order.setReceiverDetailAddress(address.getDetailAddress());
         //0->未确认；1->已确认
-        order.setConfirmStatus(0);
-        order.setDeleteStatus(0);
+        order.setConfirmStatus(0);  // 未收到
+        order.setDeleteStatus(0);   // 未删除
         //计算赠送积分
         order.setIntegration(calcGifIntegration(orderItemList));
         //计算赠送成长值
@@ -216,7 +225,7 @@ public class OmsFrontEndOrderServiceImpl implements OmsFrontEndOrderService {
         if(CollUtil.isNotEmpty(orderSettings)){
             order.setAutoConfirmDay(orderSettings.get(0).getConfirmOvertime());
         }
-        // TODO: 2018/9/3 bill_*,delivery_*
+        // TODO:  bill_*,delivery_*
         //插入order表和order_item表
         orderMapper.insert(order);
         for (OmsOrderItem orderItem : orderItemList) {
@@ -243,6 +252,12 @@ public class OmsFrontEndOrderServiceImpl implements OmsFrontEndOrderService {
         return result;
     }
 
+    /**
+     * 支付成功后的回调
+     * @param orderId
+     * @param payType
+     * @return
+     */
     @Override
     public Integer paySuccess(Long orderId, Integer payType) {
         //修改订单支付状态
@@ -253,17 +268,21 @@ public class OmsFrontEndOrderServiceImpl implements OmsFrontEndOrderService {
         order.setPayType(payType);
         orderMapper.updateByPrimaryKeySelective(order);
         //恢复所有下单商品的锁定库存，扣减真实库存
-        OmsOrderDetail orderDetail = portalOrderDao.getDetail(orderId);
-        int count = portalOrderDao.updateSkuStock(orderDetail.getOrderItemList());
+        OmsOrderDetail orderDetail = frontEndOrderDao.getDetail(orderId);
+        int count = frontEndOrderDao.updateSkuStock(orderDetail.getOrderItemList());
         return count;
     }
 
+    /**
+     * 自动取消超时订单
+     * @return
+     */
     @Override
     public Integer cancelTimeOutOrder() {
         Integer count=0;
         OmsOrderSetting orderSetting = orderSettingMapper.selectByPrimaryKey(1L);
         //查询超时、未支付的订单及订单详情
-        List<OmsOrderDetail> timeOutOrders = portalOrderDao.getTimeOutOrders(orderSetting.getNormalOrderOvertime());
+        List<OmsOrderDetail> timeOutOrders = frontEndOrderDao.getTimeOutOrders(orderSetting.getNormalOrderOvertime());
         if (CollectionUtils.isEmpty(timeOutOrders)) {
             return count;
         }
@@ -272,10 +291,10 @@ public class OmsFrontEndOrderServiceImpl implements OmsFrontEndOrderService {
         for (OmsOrderDetail timeOutOrder : timeOutOrders) {
             ids.add(timeOutOrder.getId());
         }
-        portalOrderDao.updateOrderStatus(ids, 4);
+        frontEndOrderDao.updateOrderStatus(ids, 4);
         for (OmsOrderDetail timeOutOrder : timeOutOrders) {
             //解除订单商品库存锁定
-            portalOrderDao.releaseSkuStockLock(timeOutOrder.getOrderItemList());
+            frontEndOrderDao.releaseSkuStockLock(timeOutOrder.getOrderItemList());
             //修改优惠券使用状态
             updateCouponStatus(timeOutOrder.getCouponId(), timeOutOrder.getMemberId(), 0);
             //返还使用积分
@@ -287,6 +306,10 @@ public class OmsFrontEndOrderServiceImpl implements OmsFrontEndOrderService {
         return timeOutOrders.size();
     }
 
+    /**
+     * 取消单个超时订单
+     * @param orderId
+     */
     @Override
     public void cancelOrder(Long orderId) {
         //查询未付款的取消订单
@@ -306,7 +329,7 @@ public class OmsFrontEndOrderServiceImpl implements OmsFrontEndOrderService {
             List<OmsOrderItem> orderItemList = orderItemMapper.selectByExample(orderItemExample);
             //解除订单商品库存锁定
             if (!CollectionUtils.isEmpty(orderItemList)) {
-                portalOrderDao.releaseSkuStockLock(orderItemList);
+                frontEndOrderDao.releaseSkuStockLock(orderItemList);
             }
             //修改优惠券使用状态
             updateCouponStatus(cancelOrder.getCouponId(), cancelOrder.getMemberId(), 0);
@@ -318,6 +341,10 @@ public class OmsFrontEndOrderServiceImpl implements OmsFrontEndOrderService {
         }
     }
 
+    /**
+     * 发送延迟消息取消订单
+     * @param orderId
+     */
     @Override
     public void sendDelayMessageCancelOrder(Long orderId) {
         //获取订单超时时间
@@ -327,6 +354,10 @@ public class OmsFrontEndOrderServiceImpl implements OmsFrontEndOrderService {
         cancelOrderSender.sendMessage(orderId, delayTimes);
     }
 
+    /**
+     * 确认收货
+     * @param orderId
+     */
     @Override
     public void confirmReceiveOrder(Long orderId) {
         UmsMember member = memberService.getCurrentMember();
@@ -343,6 +374,13 @@ public class OmsFrontEndOrderServiceImpl implements OmsFrontEndOrderService {
         orderMapper.updateByPrimaryKey(order);
     }
 
+    /**
+     * 分页获取用户订单
+     * @param status
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     @Override
     public CommonPage<OmsOrderDetail> list(Integer status, Integer pageNum, Integer pageSize) {
         if(status==-1){
@@ -386,6 +424,11 @@ public class OmsFrontEndOrderServiceImpl implements OmsFrontEndOrderService {
         return resultPage;
     }
 
+    /**
+     * 根据订单ID获取订单详情
+     * @param orderId
+     * @return
+     */
     @Override
     public OmsOrderDetail detail(Long orderId) {
         OmsOrder omsOrder = orderMapper.selectByPrimaryKey(orderId);
@@ -398,6 +441,10 @@ public class OmsFrontEndOrderServiceImpl implements OmsFrontEndOrderService {
         return orderDetail;
     }
 
+    /**
+     * 用户根据订单ID删除订单
+     * @param orderId
+     */
     @Override
     public void deleteOrder(Long orderId) {
         UmsMember member = memberService.getCurrentMember();
@@ -414,7 +461,7 @@ public class OmsFrontEndOrderServiceImpl implements OmsFrontEndOrderService {
     }
 
     /**
-     * 生成18位订单编号:8位日期+2位平台号码+2位支付方式+6位以上自增id
+     * 生成18位订单编号:8位日期 + 2位平台号码 + 2位支付方式 + 6位以上自增id
      */
     private String generateOrderSn(OmsOrder order) {
         StringBuilder sb = new StringBuilder();
@@ -729,16 +776,16 @@ public class OmsFrontEndOrderServiceImpl implements OmsFrontEndOrderService {
      */
     private ConfirmOrderResult.CalcAmount calcCartAmount(List<CartPromotionItem> cartPromotionItemList) {
         ConfirmOrderResult.CalcAmount calcAmount = new ConfirmOrderResult.CalcAmount();
-        calcAmount.setFreightAmount(new BigDecimal(0));
+        calcAmount.setFreightAmount(new BigDecimal(0));     // 运费
         BigDecimal totalAmount = new BigDecimal("0");
         BigDecimal promotionAmount = new BigDecimal("0");
         for (CartPromotionItem cartPromotionItem : cartPromotionItemList) {
-            totalAmount = totalAmount.add(cartPromotionItem.getPrice().multiply(new BigDecimal(cartPromotionItem.getQuantity())));
-            promotionAmount = promotionAmount.add(cartPromotionItem.getReduceAmount().multiply(new BigDecimal(cartPromotionItem.getQuantity())));
+            totalAmount = totalAmount.add(cartPromotionItem.getPrice().multiply(new BigDecimal(cartPromotionItem.getQuantity())));  // 总金额
+            promotionAmount = promotionAmount.add(cartPromotionItem.getReduceAmount().multiply(new BigDecimal(cartPromotionItem.getQuantity())));   // 活动优惠
         }
         calcAmount.setTotalAmount(totalAmount);
         calcAmount.setPromotionAmount(promotionAmount);
-        calcAmount.setPayAmount(totalAmount.subtract(promotionAmount));
+        calcAmount.setPayAmount(totalAmount.subtract(promotionAmount));     // 实付金额
         return calcAmount;
     }
 

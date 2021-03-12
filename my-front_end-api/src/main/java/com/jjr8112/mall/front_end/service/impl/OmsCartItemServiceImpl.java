@@ -24,7 +24,6 @@ import java.util.stream.Collectors;
 
 /**
  * 购物车管理Service实现类
- * Created by macro on 2018/8/2.
  */
 @Service
 public class OmsCartItemServiceImpl implements OmsCartItemService {
@@ -37,10 +36,15 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
     @Autowired
     private UmsMemberService memberService;
 
+    /**
+     * 查询购物车中是否包含该商品，有增加数量，无添加到购物车
+     * @param cartItem
+     * @return
+     */
     @Override
     public int add(OmsCartItem cartItem) {
         int count;
-        UmsMember currentMember =memberService.getCurrentMember();
+        UmsMember currentMember = memberService.getCurrentMember(); //
         cartItem.setMemberId(currentMember.getId());
         cartItem.setMemberNickname(currentMember.getNickname());
         cartItem.setDeleteStatus(0);
@@ -73,6 +77,11 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
         return null;
     }
 
+    /**
+     * 根据会员编号获取购物车列表
+     * @param memberId
+     * @return
+     */
     @Override
     public List<OmsCartItem> list(Long memberId) {
         OmsCartItemExample example = new OmsCartItemExample();
@@ -80,6 +89,12 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
         return cartItemMapper.selectByExample(example);
     }
 
+    /**
+     * 获取包含促销活动信息的购物车列表
+     * @param memberId
+     * @param cartIds
+     * @return
+     */
     @Override
     public List<CartPromotionItem> listPromotion(Long memberId, List<Long> cartIds) {
         List<OmsCartItem> cartItemList = list(memberId);
@@ -93,6 +108,13 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
         return cartPromotionItemList;
     }
 
+    /**
+     * 修改某个购物车商品的数量
+     * @param id
+     * @param memberId
+     * @param quantity
+     * @return
+     */
     @Override
     public int updateQuantity(Long id, Long memberId, Integer quantity) {
         OmsCartItem cartItem = new OmsCartItem();
@@ -103,6 +125,12 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
         return cartItemMapper.updateByExampleSelective(cartItem, example);
     }
 
+    /**
+     * 批量删除购物车中的商品
+     * @param memberId
+     * @param ids
+     * @return
+     */
     @Override
     public int delete(Long memberId, List<Long> ids) {
         OmsCartItem record = new OmsCartItem();
@@ -112,11 +140,21 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
         return cartItemMapper.updateByExampleSelective(record, example);
     }
 
+    /**
+     * 获取购物车中用于选择商品规格的商品信息
+     * @param productId
+     * @return
+     */
     @Override
     public CartProduct getCartProduct(Long productId) {
         return productDao.getCartProduct(productId);
     }
 
+    /**
+     * 修改购物车中商品的规格
+     * @param cartItem
+     * @return
+     */
     @Override
     public int updateAttr(OmsCartItem cartItem) {
         //删除原购物车信息
@@ -130,6 +168,11 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
         return 1;
     }
 
+    /**
+     * 清空购物车
+     * @param memberId
+     * @return
+     */
     @Override
     public int clear(Long memberId) {
         OmsCartItem record = new OmsCartItem();

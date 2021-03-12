@@ -25,13 +25,13 @@ import java.util.Map;
 @RequestMapping("/order")
 public class OmsFrontEndOrderController {
     @Autowired
-    private OmsFrontEndOrderService portalOrderService;
+    private OmsFrontEndOrderService frontEndOrderService;
 
     @ApiOperation("根据购物车信息生成确认单信息")
     @RequestMapping(value = "/generateConfirmOrder", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult<ConfirmOrderResult> generateConfirmOrder(@RequestBody List<Long> cartIds) {
-        ConfirmOrderResult confirmOrderResult = portalOrderService.generateConfirmOrder(cartIds);
+        ConfirmOrderResult confirmOrderResult = frontEndOrderService.generateConfirmOrder(cartIds);
         return CommonResult.success(confirmOrderResult);
     }
 
@@ -39,7 +39,7 @@ public class OmsFrontEndOrderController {
     @RequestMapping(value = "/generateOrder", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult generateOrder(@RequestBody OrderParam orderParam) {
-        Map<String, Object> result = portalOrderService.generateOrder(orderParam);
+        Map<String, Object> result = frontEndOrderService.generateOrder(orderParam);
         return CommonResult.success(result, "下单成功");
     }
 
@@ -47,7 +47,7 @@ public class OmsFrontEndOrderController {
     @RequestMapping(value = "/paySuccess", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult paySuccess(@RequestParam Long orderId, @RequestParam Integer payType) {
-        Integer count = portalOrderService.paySuccess(orderId,payType);
+        Integer count = frontEndOrderService.paySuccess(orderId,payType);
         return CommonResult.success(count, "支付成功");
     }
 
@@ -55,7 +55,7 @@ public class OmsFrontEndOrderController {
     @RequestMapping(value = "/cancelTimeOutOrder", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult cancelTimeOutOrder() {
-        portalOrderService.cancelTimeOutOrder();
+        frontEndOrderService.cancelTimeOutOrder();
         return CommonResult.success(null);
     }
 
@@ -63,7 +63,7 @@ public class OmsFrontEndOrderController {
     @RequestMapping(value = "/cancelOrder", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult cancelOrder(Long orderId) {
-        portalOrderService.sendDelayMessageCancelOrder(orderId);
+        frontEndOrderService.sendDelayMessageCancelOrder(orderId);
         return CommonResult.success(null);
     }
 
@@ -75,7 +75,7 @@ public class OmsFrontEndOrderController {
     public CommonResult<CommonPage<OmsOrderDetail>> list(@RequestParam Integer status,
                                                          @RequestParam(required = false, defaultValue = "1") Integer pageNum,
                                                          @RequestParam(required = false, defaultValue = "5") Integer pageSize) {
-        CommonPage<OmsOrderDetail> orderPage = portalOrderService.list(status,pageNum,pageSize);
+        CommonPage<OmsOrderDetail> orderPage = frontEndOrderService.list(status,pageNum,pageSize);
         return CommonResult.success(orderPage);
     }
 
@@ -83,7 +83,7 @@ public class OmsFrontEndOrderController {
     @RequestMapping(value = "/detail/{orderId}", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<OmsOrderDetail> detail(@PathVariable Long orderId) {
-        OmsOrderDetail orderDetail = portalOrderService.detail(orderId);
+        OmsOrderDetail orderDetail = frontEndOrderService.detail(orderId);
         return CommonResult.success(orderDetail);
     }
 
@@ -91,7 +91,7 @@ public class OmsFrontEndOrderController {
     @RequestMapping(value = "/cancelUserOrder", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult cancelUserOrder(Long orderId) {
-        portalOrderService.cancelOrder(orderId);
+        frontEndOrderService.cancelOrder(orderId);
         return CommonResult.success(null);
     }
 
@@ -99,7 +99,7 @@ public class OmsFrontEndOrderController {
     @RequestMapping(value = "/confirmReceiveOrder", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult confirmReceiveOrder(Long orderId) {
-        portalOrderService.confirmReceiveOrder(orderId);
+        frontEndOrderService.confirmReceiveOrder(orderId);
         return CommonResult.success(null);
     }
 
@@ -107,7 +107,7 @@ public class OmsFrontEndOrderController {
     @RequestMapping(value = "/deleteOrder", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult deleteOrder(Long orderId) {
-        portalOrderService.deleteOrder(orderId);
+        frontEndOrderService.deleteOrder(orderId);
         return CommonResult.success(null);
     }
 }

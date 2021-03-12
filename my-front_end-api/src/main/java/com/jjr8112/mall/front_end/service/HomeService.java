@@ -21,6 +21,7 @@ public interface HomeService {
     /**
      * 首页商品推荐
      */
+    // 后加
     List<PmsProduct> recommendProductList(Integer pageSize, Integer pageNum);
 
     /**
@@ -38,11 +39,14 @@ public interface HomeService {
     /**
      * 分页获取人气推荐商品
      */
+    // 后加
     List<PmsProduct> hotProductList(Integer pageNum, Integer pageSize);
+
 
     /**
      * 分页获取新品推荐商品
      */
+    // 后加
     List<PmsProduct> newProductList(Integer pageNum, Integer pageSize);
 }
 
