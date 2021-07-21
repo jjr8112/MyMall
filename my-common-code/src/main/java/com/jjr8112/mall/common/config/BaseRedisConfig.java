@@ -22,10 +22,7 @@ import java.time.Duration;
 
 
 @Configuration
-                    // 若未加此处，报错：
-                    //  Method annotated with @Bean is called directly. Use dependency injection instead.
-                    // 加上该注解，仍报错：
-                    //  Could not autowire. No beans of 'RedisConnectionFactory' type found.
+
 public class BaseRedisConfig {
 
     @Bean

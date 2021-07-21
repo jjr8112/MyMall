@@ -15,6 +15,7 @@ import com.jjr8112.mall.front_end.domain.*;
 import com.jjr8112.mall.front_end.service.*;
 import com.jjr8112.mall.mbg.mapper.*;
 import com.jjr8112.mall.mbg.model.*;
+import com.sun.xml.internal.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -291,6 +292,7 @@ public class OmsFrontEndOrderServiceImpl implements OmsFrontEndOrderService {
         for (OmsOrderDetail timeOutOrder : timeOutOrders) {
             ids.add(timeOutOrder.getId());
         }
+        //TODO:多线程改造
         frontEndOrderDao.updateOrderStatus(ids, 4);
         for (OmsOrderDetail timeOutOrder : timeOutOrders) {
             //解除订单商品库存锁定
